@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Domain;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
+using System.Threading.Tasks;
 
 namespace Reactivities.Controllers
 {
@@ -32,7 +28,7 @@ namespace Reactivities.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
-            var value = await  _context.Values.FirstOrDefaultAsync(a => a.Id == id);
+            var value = await _context.Values.FirstOrDefaultAsync(a => a.Id == id);
             return Ok(value);
         }
 
