@@ -30,6 +30,13 @@ namespace Reactivities
             services.AddDbContext<DataContext>(opt =>
                 opt.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddCors(opt =>
+            {
+                opt.AddPolicy("CorePolicy", policy =>
+                    {
+                        policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
+                    });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,6 +52,7 @@ namespace Reactivities
                 // app.UseHsts();
             }
 
+            app.UseCors("CorePolicy");
             // app.UseHttpsRedirection();
             app.UseMvc();
         }
